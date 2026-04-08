@@ -591,6 +591,50 @@ body.night .search-text mark { background: #665500; color: #fff; }
 .toggle-switch input:checked + .toggle-slider { background: var(--accent); }
 .toggle-switch input:checked + .toggle-slider::before { transform: translateX(20px); }
 
+/* ===== ABOUT SECTION ===== */
+.about-section {
+  border-top: 1px solid var(--border);
+  padding: 14px 18px 18px;
+}
+
+.about-title {
+  font-size: 0.82em;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 10px;
+}
+
+.about-body {
+  font-size: 0.8em;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.about-body p { margin-bottom: 4px; }
+
+.about-divider {
+  border-top: 1px solid var(--border);
+  margin: 10px 0;
+}
+
+.about-dedication {
+  color: var(--accent2);
+  font-style: italic;
+}
+
+.about-mission {
+  color: var(--text-light);
+  font-style: italic;
+  font-size: 0.95em;
+}
+
+.about-copy {
+  color: var(--text-light);
+  font-size: 0.88em;
+}
+
 /* ===== UTILITY ===== */
 .hidden { display: none !important; }
 

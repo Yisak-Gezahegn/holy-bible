@@ -1,8 +1,11 @@
 {
   "name": "holy-bible",
   "version": "1.0.0",
-  "description": "",
+  "description": "A multilingual Holy Bible app in English, Amharic, and Afaan Oromo",
   "main": "main.js",
+  "author": "Yisak Gezahegn",
+  "license": "MIT",
+  "type": "commonjs",
   "scripts": {
     "start": "electron .",
     "dist": "electron-builder"
@@ -33,10 +36,7 @@
       "icon": "assets/icon.png"
     }
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "keywords": ["bible", "amharic", "oromo", "english", "ethiopia"],
   "devDependencies": {
     "electron": "^41.1.1",
     "electron-builder": "^26.8.1"

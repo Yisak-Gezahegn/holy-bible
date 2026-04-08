@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Holy Bible</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="app-title">✝ Holy Bible</div>
+
+    <div class="lang-tabs">
+      <button class="lang-btn active" data-lang="eng">English</button>
+      <button class="lang-btn" data-lang="amh">አማርኛ</button>
+      <button class="lang-btn" data-lang="orm">Afaan Oromo</button>
+    </div>
+
+    <div class="view-tabs">
+      <button class="view-btn active" id="singleViewBtn" title="Single Language">📖 Single</button>
+      <button class="view-btn" id="parallelViewBtn" title="All 3 Languages Side by Side">⊞ Parallel</button>
+    </div>
+
+    <div class="topbar-right">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="🔍  Search verses..." />
+        <button id="searchBtn">Search</button>
+      </div>
+      <button class="icon-btn" id="settingsBtn" title="Settings">⚙</button>
+    </div>
+  </header>
+
+  <!-- BODY: SIDEBAR + CONTENT -->
+  <div class="app-body">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+
+      <!-- Testament tabs -->
+      <div class="testament-tabs">
+        <button class="tab-btn active" id="otBtn">Old Testament</button>
+        <button class="tab-btn" id="ntBtn">New Testament</button>
+      </div>
+
+      <!-- Book list -->
+      <div class="book-list" id="bookList"></div>
+
+      <!-- Chapter grid -->
+      <div class="chapter-panel" id="chapterPanel">
+        <div class="chapter-panel-title" id="chapterPanelTitle"></div>
+        <div class="chapter-grid" id="chapterGrid"></div>
+      </div>
+
+    </aside>
+
+    <!-- MAIN READING AREA -->
+    <main class="content">
+
+      <!-- Chapter nav bar -->
+      <div class="chapter-nav">
+        <button class="nav-arrow" id="prevChapter">&#8592; Prev</button>
+        <div class="chapter-title" id="chapterHeader"></div>
+        <button class="nav-arrow" id="nextChapter">Next &#8594;</button>
+      </div>
+
+      <!-- Single view -->
+      <div id="singleView" class="bible-view">
+        <div class="verses" id="versesContainer"></div>
+      </div>
+
+      <!-- Parallel view -->
+      <div id="parallelView" class="parallel-view hidden">
+        <div class="parallel-col">
+          <div class="parallel-lang-label">English (KJV)</div>
+          <div class="verses" id="parallelEng"></div>
+        </div>
+        <div class="parallel-col">
+          <div class="parallel-lang-label">አማርኛ (Amharic)</div>
+          <div class="verses" id="parallelAmh"></div>
+        </div>
+        <div class="parallel-col">
+          <div class="parallel-lang-label">Afaan Oromo</div>
+          <div class="verses" id="parallelOrm"></div>
+        </div>
+      </div>
+
+      <!-- Search results -->
+      <div id="searchResults" class="search-results hidden"></div>
+
+    </main>
+  </div>
+
+  <!-- SETTINGS PANEL -->
+  <div id="settingsPanel" class="settings-panel hidden">
+    <div class="settings-header">
+      <span>Settings</span>
+      <button id="closeSettings">✕</button>
+    </div>
+    <div class="settings-body">
+      <label class="setting-row">
+        <span>Font Size</span>
+        <div class="slider-row">
+          <span class="size-label">A</span>
+          <input type="range" id="fontSizeSlider" min="14" max="32" value="18" />
+          <span class="size-label big">A</span>
+          <span id="fontSizeValue">18px</span>
+        </div>
+      </label>
+      <label class="setting-row toggle-row">
+        <span>Night Mode</span>
+        <div class="toggle-switch">
+          <input type="checkbox" id="nightModeToggle" />
+          <span class="toggle-slider"></span>
+        </div>
+      </label>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

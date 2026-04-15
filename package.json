@@ -1,6 +1,6 @@
 {
   "name": "holy-bible",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A multilingual Holy Bible app in English, Amharic, and Afaan Oromo",
   "main": "main.js",
   "author": "Yisak Gezahegn",
@@ -15,6 +15,9 @@
     "productName": "Holy Bible",
     "asar": false,
     "icon": "assets/icon.png",
+    "directories": {
+      "output": "dist2"
+    },
     "files": [
       "main.js",
       "src/**/*",

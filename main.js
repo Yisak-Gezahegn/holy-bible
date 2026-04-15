@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, Menu } = require('electron')
 const path = require('path')
 const fs   = require('fs')
 
@@ -11,20 +11,21 @@ function resolveIcon () {
 }
 
 function createWindow() {
+  Menu.setApplicationMenu(null)   // remove native menu bar
+
   const win = new BrowserWindow({
     width: 1280,
     height: 800,
     minWidth: 900,
     minHeight: 600,
     icon: resolveIcon(),
-    title: 'መጽሐፍ ቅዱስ | Kitaaba Qulqulluu | Holy Bible',
+    title: 'Holy Bible — መጽሐፍ ቅዱስ | Macaafa Qulquulu',
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
       devTools: false
     }
   })
-  // win.webContents.openDevTools()
 
   win.loadFile('src/index.html')
 }

@@ -8,7 +8,7 @@
 </head>
 <body>
 
-  <!-- TOP BAR -->
+  <!-- TOP BAR (original design restored) -->
   <header class="topbar">
     <div class="app-title">✝ Holy Bible</div>
 
@@ -24,10 +24,23 @@
     </div>
 
     <div class="topbar-right">
+      <!-- Version selector (new) -->
+      <select id="versionSelect" class="version-select-topbar" title="Bible Version"></select>
+
       <div class="search-box">
-        <input type="text" id="searchInput" placeholder="🔍  Search verses..." />
+        <input type="text" id="searchInput" placeholder="🔍  Search verses..." autocomplete="off" />
         <button id="searchBtn">Search</button>
       </div>
+
+      <!-- Search scope (always visible in topbar) -->
+      <div id="searchScopeWrap" class="search-scope-wrap">
+        <label><input type="radio" name="scope" value="all" checked /> All</label>
+        <label><input type="radio" name="scope" value="ot" /> OT</label>
+        <label><input type="radio" name="scope" value="nt" /> NT</label>
+        <label><input type="radio" name="scope" value="book" /> Book</label>
+      </div>
+
+      <button class="icon-btn" id="libraryBtn" title="My Library">🔖</button>
       <button class="icon-btn" id="settingsBtn" title="Settings">⚙</button>
     </div>
   </header>
@@ -58,39 +71,75 @@
     <!-- MAIN READING AREA -->
     <main class="content">
 
-      <!-- Chapter nav bar -->
-      <div class="chapter-nav">
-        <button class="nav-arrow" id="prevChapter">&#8592; Prev</button>
-        <div class="chapter-title" id="chapterHeader"></div>
-        <button class="nav-arrow" id="nextChapter">Next &#8594;</button>
+      <!-- Reader tab -->
+      <div id="readerTab" class="tab-pane active">
+
+        <!-- Chapter nav bar -->
+        <div class="chapter-nav">
+          <button class="nav-arrow" id="prevChapter">&#8592; Prev</button>
+          <div class="chapter-title" id="chapterHeader"></div>
+          <button class="nav-arrow" id="nextChapter">Next &#8594;</button>
+        </div>
+
+        <!-- Single view -->
+        <div id="singleView" class="bible-view">
+          <div class="verses" id="versesContainer"></div>
+        </div>
+
+        <!-- Parallel view -->
+        <div id="parallelView" class="parallel-view hidden">
+          <div class="parallel-col">
+            <div class="parallel-lang-label">English (KJV)</div>
+            <div class="verses" id="parallelCol1"></div>
+          </div>
+          <div class="parallel-col">
+            <div class="parallel-lang-label">አማርኛ (Amharic)</div>
+            <div class="verses" id="parallelCol2"></div>
+          </div>
+          <div class="parallel-col">
+            <div class="parallel-lang-label">Macaafa Qulquulu</div>
+            <div class="verses" id="parallelCol3"></div>
+          </div>
+        </div>
+
+        <!-- Search results -->
+        <div id="searchResults" class="search-results hidden"></div>
+
       </div>
 
-      <!-- Single view -->
-      <div id="singleView" class="bible-view">
-        <div class="verses" id="versesContainer"></div>
+      <!-- Library tab -->
+      <div id="libraryTab" class="tab-pane hidden">
+        <div class="library-header">
+          <span class="library-title">📚 My Library</span>
+          <div class="lib-filters">
+            <button class="lib-filter active" data-filter="all">All</button>
+            <button class="lib-filter" data-filter="highlight">Highlights</button>
+            <button class="lib-filter" data-filter="bookmark">Bookmarks</button>
+            <button class="lib-filter" data-filter="note">Notes</button>
+          </div>
+          <button class="nav-arrow" id="libraryBackBtn">← Back to Reader</button>
+        </div>
+        <div id="libraryList" class="library-list"></div>
       </div>
-
-      <!-- Parallel view -->
-      <div id="parallelView" class="parallel-view hidden">
-        <div class="parallel-col">
-          <div class="parallel-lang-label">English (KJV)</div>
-          <div class="verses" id="parallelEng"></div>
-        </div>
-        <div class="parallel-col">
-          <div class="parallel-lang-label">አማርኛ (Amharic)</div>
-          <div class="verses" id="parallelAmh"></div>
-        </div>
-        <div class="parallel-col">
-          <div class="parallel-lang-label">Afaan Oromo</div>
-          <div class="verses" id="parallelOrm"></div>
-        </div>
-      </div>
-
-      <!-- Search results -->
-      <div id="searchResults" class="search-results hidden"></div>
 
     </main>
   </div>
+
+  <!-- COLOR PICKER POPUP -->
+  <div id="colorPicker" class="color-picker hidden">
+    <div class="cp-row">
+      <button class="cp-color" data-color="0" style="background:#FFD700" title="Gold"></button>
+      <button class="cp-color" data-color="1" style="background:#90EE90" title="Green"></button>
+      <button class="cp-color" data-color="2" style="background:#87CEEB" title="Blue"></button>
+      <button class="cp-color" data-color="3" style="background:#FFB6C1" title="Pink"></button>
+      <button class="cp-color" data-color="4" style="background:#FFA500" title="Orange"></button>
+      <button class="cp-color" data-color="5" style="background:#DDA0DD" title="Purple"></button>
+      <button class="cp-clear" id="cpClear" title="Remove highlight">✕</button>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="toast hidden"></div>
 
   <!-- SETTINGS PANEL -->
   <div id="settingsPanel" class="settings-panel hidden">
@@ -120,8 +169,8 @@
     <div class="about-section">
       <div class="about-title">✝ About This App</div>
       <div class="about-body">
-        <p><strong>Holy Bible</strong> — Multilingual Scripture Reader</p>
-        <p>English (KJV) · አማርኛ · Afaan Oromo</p>
+        <p><strong>Holy Bible</strong> v1.0.1</p>
+        <p>English (KJV) · አማርኛ · Macaafa Qulquulu</p>
         <div class="about-divider"></div>
         <p>Developed by <strong>Yisak Gezahegn</strong></p>
         <p>Adama, Ethiopia</p>
@@ -135,11 +184,9 @@
           "Bringing the Word of God to every reader,<br/>in every language."
         </p>
         <div class="about-divider"></div>
-        <p class="about-copy">© 2025 Yisak Gezahegn · MIT License</p>
-        <p class="about-copy">Version 1.0.0</p>
+        <p class="about-copy">© 2026 Yisak Gezahegn · MIT License</p>
       </div>
     </div>
-
   </div>
 
   <script src="renderer.js"></script>
